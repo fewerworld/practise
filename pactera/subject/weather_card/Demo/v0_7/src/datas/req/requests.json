@@ -1,0 +1,38 @@
+{
+  "requests": [
+    {
+      "openWeather": {
+        "url": "",
+        "api_name": "",
+        "req_params": {
+          "q": "Melbourne"
+        }
+      },
+      "jd": {
+        "url": "https://way.jd.com/he/freeweather",
+        "api_name": "jingdong wanxiang",
+        "req_params": {
+          "appkey": "5b76e93da69d9d512dc42e37f4c6e912",
+          "city": "Sydney"
+        }
+      }
+    }
+  ],
+  "local_requests": [
+
+
+    {
+      "request": {
+        "r_name": "OpenWeather",
+        "url": "",
+        "method": "GET"
+      }
+    },{
+      "request": {
+        "r_name": "Weather",
+        "url": "",
+        "method": "GET"
+      }
+    }
+  ]
+}
