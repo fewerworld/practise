@@ -8,7 +8,7 @@ module.exports = {
     runtimeCompiler: true,
     devServer:{
       host: 'localhost',
-      port: '8800',
+      port: '80',
       proxy: {
           '/v7':{
               target: 'https://devapi.qweather.com',
