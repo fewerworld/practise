@@ -3,7 +3,6 @@
     <h1>{{ msg }}</h1>
     <div id="copy_content" class="copyContent">
       <div class="auther_desc">{{auther_desc}}</div>
-<!--      <div id="read_me" class="naviReadMe">ReadMe</div>-->
     </div>
     <hr style="height:1px;
                border:none;
@@ -32,9 +31,7 @@ ul {
   padding: 0;
 }
 li {
-  /*display: inline-block;*/
   margin: 40px 10px;
-  /*text-align: left;*/
 }
 a {
   color: #42b983;

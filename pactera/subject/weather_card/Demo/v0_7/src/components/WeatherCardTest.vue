@@ -1,12 +1,9 @@
 <!-- Without the components using temporarily -->
 <template>
   <div id="cList" class="wea_c">
-    <!--    <h1 v-for="i in items">{{ test_text }}</h1>-->
-<!--      <div class="weatherCardComp">aaa</div>-->
     <pre id="pre_weather_card">
-      <div id="weather_card_display" >
+      <div id="weather_card_display" v-bind="card" :key="card.cityNo">
 <!--        <div id="error_msg"></div>-->
-
 
         City :        {{card.city}}
         Update Time : {{card.up_date}}
@@ -19,17 +16,16 @@
                border-top:1px dashed #0066CC;
                margin: 0% 0% 0% 0%"/>
     </pre>
-<!--      <card-component></card-component>-->
   </div>
 </template>
 
 <script>
-// import Vue from 'vue'
 import axios from 'axios';
-// import urls from '../datas/req/requests.json'
 
 // No better way over the hardcode of request url.
-const urls = '/v7/weather/now';
+// eslint-disable-next-line no-unused-vars
+// const urls = '/v7/weather/now';
+const urls = 'https://devapi.qweather.com/v7/weather/now';
 
 const req_key = 'b7f30cf2ab3c48c988c7d0a8d8d13b53';
 const req_lang = 'en';
@@ -40,15 +36,9 @@ export default {
     card:Object,
     error_msg: String,
   },
-  data(){
-    return {
-
-    }
-  },
   methods:{
     // eslint-disable-next-line no-unused-vars
     queryWeather(card){
-      alert("Loop testing"+card.cityNo)
       const use_url = urls;
       axios.get(use_url,{
         params: {
@@ -56,27 +46,17 @@ export default {
           location: card.cityNo,
           lang : req_lang
         }
-      }).then(function(resp){
+      }).then(resp => {
         const _data = resp.data;
         const nowData = _data.now;
-        // card.up_date = this.dateFormat("W HH:MM:SS",_data.updateTime);
-        card.up_date = _data.updateTime;
-        // card.weather = nowData.text;
-        card.temperature = nowData.temp;
-        card.wind = nowData.windSpeed;
-        console.log(JSON.stringify(nowData.text));
-      })
-    },
-    // eslint-disable-next-line no-unused-vars
-    queryWeatherJSONP(card,index){
-      alert("JSONP card country "+card.city+" is doing on request.")
-      const use_url = urls;
-      this.$http.jsonp(use_url,{
-        key: req_key,
-        location: card.cityNo,
-        lang : req_lang
-      }).then(function(resp){
+        // card.up_date = this.dateFormat("W HH:MM:SS",_data["updateTime"]);
+        card.up_date = _data["updateTime"];
+        card.weather = nowData["text"];
+        card.temperature = nowData["temp"];
+        card.wind = nowData["windSpeed"];
         console.log(JSON.stringify(resp));
+      }).catch(err=>{
+        console.log("Caught the error: "+err)
       })
     },
     dateFormat(format,date){
@@ -112,20 +92,6 @@ export default {
     }
   },
 }
-
-// Deprecate to use inner components here. Waiting for the next iteration.
-// Vue.component('card-component',{
-//   template: '<div><text>Building Weather Card Component</text></div>',
-//   methods:{
-//     funcTest(){
-//       alert("comp aaa")
-//     }
-//   }
-// });
-// new Vue({
-//   el:"#cList"
-// })
-
 
 </script>
 
